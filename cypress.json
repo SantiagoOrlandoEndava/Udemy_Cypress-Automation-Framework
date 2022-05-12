@@ -1,0 +1,14 @@
+{
+    "baseUrl": "http://www.webdriveruniversity.com",
+    "ignoreTestFiles": ["**/1-getting-started/*" , "**/2-advanced-examples/*"],
+    "video": false,
+
+    "env": {
+        "first_name": "Sarah"
+    },
+    "projectId": "5nwwf9",
+    "reporter": "cypress-multi-reporters",
+    "reporterOptions": {
+      "configFile": "reporter-config.json"
+    }
+}
