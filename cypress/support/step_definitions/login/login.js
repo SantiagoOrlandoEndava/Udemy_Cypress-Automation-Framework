@@ -1,6 +1,6 @@
 import { Before, Given, When, And, Then } from "cypress-cucumber-preprocessor/steps";
 
-let stub;
+let stub; //we use stub because cypress automatically handles the alert.
 
 Before(() => {
     cy.log("Executing before step");
@@ -22,7 +22,7 @@ And("I enter a password {word}", (userName) =>{
 
 And('I click on the login button', () => {
     cy.get("#login-button").click();
-    cy.on('window:alert', stub);
+    cy.on('window:alert', stub); //catch the alert
 })
 
 Then('I should be presented with the following message {word} {word}', (message, message2) => {
