@@ -25,7 +25,7 @@
   "author": "Santiago Tomas Orlando",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^9.6.0",
+    "cypress": "^9.7.0",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-file-upload": "^5.0.8",
     "cypress-multi-reporters": "^1.6.0",
@@ -37,5 +37,13 @@
   },
   "cypress-cucumber-preprocessor": {
     "step_definitions": "cypress/support/step_definitions/"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SantiagoOrlandoEndava/Udemy_Cypress-Automation-Framework.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SantiagoOrlandoEndava/Udemy_Cypress-Automation-Framework/issues"
+  },
+  "homepage": "https://github.com/SantiagoOrlandoEndava/Udemy_Cypress-Automation-Framework#readme"
 }

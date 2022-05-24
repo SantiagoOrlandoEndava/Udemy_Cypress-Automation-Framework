@@ -5,11 +5,12 @@ describe("Post, Get, Delete Request", () => {
     var comments = new Array();
     let comment = Math.random().toString(36).substring(1) + Math.random().toString(36).substring(1);
     let randomPostId = Math.floor(Math.random() * 1000 + 1);
+    const urlBase = "http://localhost:3000/comments";
 
     it("Create a new comment", () => {
         cy.request({
             method: "POST",
-            url: "http://localhost:3000/comments",
+            url: urlBase,
             body: {
                 body: comment,
                 postId: randomPostId
@@ -22,7 +23,7 @@ describe("Post, Get, Delete Request", () => {
     it("Locate and assert the new comment", () => {
         cy.request({
             method: "GET",
-            url: "http://localhost:3000/comments",
+            url: urlBase,
             headers: {
                 accept: "application/json"
             }
@@ -40,7 +41,7 @@ describe("Post, Get, Delete Request", () => {
     it("Delete the new comment", () => {
         cy.request({
             method: "DELETE",
-            url: "http://localhost:3000/comments/" + comments.length
+            url: urlBase + "/" + comments.length
         }).then((response) => {
             expect(response.status).to.eql(200);
         });
