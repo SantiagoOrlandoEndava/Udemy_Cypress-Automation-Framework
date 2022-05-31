@@ -20,10 +20,8 @@ describe("Test Contact Us form via WebdriverUni", () => {
     })
 
     it("Should be able to submit a successful submission via contact us form", () => {
-        cy.document().should('have.property', 'charset').and('eq', 'UTF-8');
         cy.title().should('include', 'WebDriver | Contact Us');
         cy.url().should('include', 'contactus');
-        //cy.get('#contact-us').click({force: true})
 
         //option 1
         // cy.get('[name="first_name"]').type(data.first_name);
@@ -33,23 +31,23 @@ describe("Test Contact Us form via WebdriverUni", () => {
         // cy.get('[type="submit"]').click();
         // cy.get('h1').should('have.text', 'Thank You for your Message!')
 
-        //option 2
+        //option 2 - custom command
         // cy.webdriverUni_ContactForm_Submission(Cypress.env("first_name"), data.last_name, data.email, 
         //     "How can I learn Cypress?", 'h1', 'Thank You for your Message!');
 
-        //option 3
+        //option 3 - PO
         contact_Us_PO.contactForm_Submission(Cypress.env("first_name"), data.last_name, data.email, 
             "How can I learn Cypress?", 'h1', 'Thank You for your Message!')
     });
 
     it("Should not be able to submit a successful submission via contact us form as all fields are required", () => {
-        //option 2
+        //option 2 - custom command
         // cy.webdriverUni_ContactForm_Submission(data.first_name, data.last_name, " ", 
             // "How can I learn Cypress?", 'body', 'Error: Invalid email address');
         //in here I am sending the email field with a " " (a space), which is not exactly what I was trying to do, because a field with a " " is not
         //the same as an empty field. There are workarounds for this, but in order not to make the code bigger I am keeping it like that.
 
-        //option 3
+        //option 3 - PO
         contact_Us_PO.contactForm_Submission(Cypress.env("first_name"), data.last_name, " ", 
             "How can I learn Cypress?", 'body', 'Error: Invalid email address')
     });
