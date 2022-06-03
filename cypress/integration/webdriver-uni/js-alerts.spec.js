@@ -3,9 +3,8 @@
 describe("Handle js alerts", () => {
 
     beforeEach(() => {
-        cy.visit("http://www.webdriveruniversity.com")
-        cy.get('#popup-alerts').invoke('removeAttr', 'target').click({force:true})
-    });
+        cy.visit("/Popup-Alerts/index.html")
+    })
 
     it("Confirm js alert contains the correct text", () => {
         cy.get('#button1').click()
@@ -13,7 +12,7 @@ describe("Handle js alerts", () => {
         cy.on('window:alert', (str) => {
             expect(str).to.equal('I am an alert box!')
         })
-    });
+    })
 
     it("Validate js confirm alert box works correctly when clicking ok", () => {
         cy.get('#button4').click()
@@ -23,7 +22,7 @@ describe("Handle js alerts", () => {
             return true;
         })
         cy.get('#confirm-alert-text').contains('You pressed OK!')
-    });
+    })
 
     it("Validate js confirm alert box works correctly when clicking cancel", () => {
         cy.get('#button4').click()
@@ -33,13 +32,13 @@ describe("Handle js alerts", () => {
             return false;
         })
         cy.get('#confirm-alert-text').contains('You pressed Cancel!')
-    });
+    })
 
     it("Validate js confirm alert box using a stub", () => {
         const stub = cy.stub()
 
         // stub.onFirstCall().returns(true) //not necessary because the default is true
-        stub.onSecondCall().returns(false) //i am making the stub change the behavior of the window:confirm and making it cancel the alert
+        stub.onSecondCall().returns(false) //I am making the stub change the behavior of the window:confirm and making it cancel the alert
 
         cy.on('window:confirm', stub)
 
@@ -55,6 +54,13 @@ describe("Handle js alerts", () => {
         }).then(() => {
             cy.get('#confirm-alert-text').contains('You pressed Cancel!')
         })
-    });
+
+        //if the window:confirm is called more than 2 times, it will return True by default.
+        cy.get('#button4').click().then(() => {
+            expect(stub).to.be.calledWith('Press a button!')
+        }).then(() => {
+            cy.get('#confirm-alert-text').contains('You pressed OK!')
+        })
+    })
 
 })

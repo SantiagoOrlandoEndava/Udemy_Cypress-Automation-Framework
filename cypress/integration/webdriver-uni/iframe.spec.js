@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
 describe("Handling IFrame & Modals", () => {
+    
     it("Handle webdriveruni iframe and modal", () => {
-        cy.visit("http://www.webdriveruniversity.com")
-        cy.get('#iframe').invoke('removeAttr', 'target').click({force:true})
+        cy.visit("/IFrame/index.html")
 
         //option 1
         // cy.get('#frame').then($iframe => {
@@ -27,7 +27,6 @@ describe("Handling IFrame & Modals", () => {
             //option 2
             cy.wrap(modal).invoke('text').should('contain', 'Welcome to webdriveruniversity.com we sell a wide range of electrical goods');
 
-            
             cy.wrap(modal).contains('Close').click()
         })
 
