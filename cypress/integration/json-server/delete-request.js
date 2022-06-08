@@ -2,6 +2,7 @@
 
 describe("Delete Request", () => {
   
+    //should make a GET after this so as to check it was indeed deleted
     it("Delete a post via /posts api", () => {
         cy.request({
             method: "DELETE",
@@ -9,7 +10,7 @@ describe("Delete Request", () => {
         }).then((response) => {
             expect(response.status).to.eql(200);
         });
-    });
+    })
 
 });
   

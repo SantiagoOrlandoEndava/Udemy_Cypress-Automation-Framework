@@ -2,9 +2,16 @@
 
 describe("Get Request", () => {
     var result;
+
     it("Validate status code of the /posts api", () => {
-        result = cy.request("http://localhost:3000/posts");
-        result.its("status").should("equal", 200)
+        //option 1: 
+        // result = cy.request("http://localhost:3000/posts");
+        // result.its("status").should("equal", 200)
+
+        //option 2:
+        cy.request("http://localhost:3000/posts").then(response => {
+            expect(response.status).to.eq(200)
+        })
     })
 
     it("Validate /posts api contains the correct keys and values", () => {
@@ -15,9 +22,6 @@ describe("Get Request", () => {
                 accept: "application/json"
             }
         }).then(response => {
-            // let body = JSON.parse(JSON.stringify(response.body)) //doesnt make sense. Its making it Json format, and then object format (as it came)
-            // cy.log(body);
-
             let body = response.body;
             cy.log(body)
             expect(body[0]).has.property("title", "Example Json Server");
@@ -25,8 +29,8 @@ describe("Get Request", () => {
 
             body.forEach((item) => {
                 expect(item).to.have.all.keys("id", "title", "author");
-                // cy.log("Author: " + item["author"] + " & Title: " + item.title);
             });
         })
     })
+
 })

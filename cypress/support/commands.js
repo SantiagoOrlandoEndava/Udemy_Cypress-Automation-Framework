@@ -32,13 +32,17 @@ Cypress.Commands.add("selectProduct", productName => {
 })
 
 Cypress.Commands.add("addProductToBasket", productName => {
-    cy.get(".fixed_wrapper .prdocutname").each(($el, index, $list) => {
-        if($el.text() === productName) {
-            cy.log($el.text())
-            cy.get('.productcart').eq(index).click();
-        }
-    });
-});
+    //option 1:
+    // cy.get(".fixed_wrapper .prdocutname").each(($el, index, $list) => {
+    //     if($el.text() === productName) {
+    //         cy.log($el.text())
+    //         cy.get('.productcart').eq(index).click();
+    //     }
+    // })
+
+    //option 2:
+    cy.get(".fixed_wrapper .prdocutname").contains(productName).closest('.col-md-3').find('.productcart').click()
+})
 
 Cypress.Commands.add("webdriverUni_ContactForm_Submission", (firstName, lastName, email, comment, $selector, textToLocate) => {
     cy.get('[name="first_name"]').type(firstName);

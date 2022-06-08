@@ -10,8 +10,6 @@ describe('Signup test', () => {
         beforeEach(() => {
             // cy.visit("http://localhost:3000/#/");
             // cy.get(".cdk-overlay-backdrop").click(-50, -50, {force: true})
-            // cy.get('#navbarAccount').click();
-            // cy.get('#navbarLoginButton').click();
             cy.visit('http://localhost:3000/')
             cy.get('button').contains('Dismiss').click()
             cy.get('#navbarAccount').click()
@@ -20,7 +18,6 @@ describe('Signup test', () => {
         })
     
         it('Test valid signup', () => {
-            // dont know if I like this following selectors:
             cy.get('#newCustomerLink').contains('Not yet a customer').click({force: true}) //the force:true is because on the website it sometimes appeared a popup for a language issue that covers the button
             cy.url().should('include', 'register')
     
@@ -37,7 +34,7 @@ describe('Signup test', () => {
             cy.get('#registerButton').click()
             cy.url().should('include', 'login')
             cy.get('.mat-snack-bar-container').contains('Registration completed successfully.');
-        });
+        })
     
         it('Test valid login', () => {
             cy.get('#email').type(email)
@@ -45,7 +42,7 @@ describe('Signup test', () => {
             cy.get('#loginButton').click()
             // cy.get('.mat-button-wrapper').contains('Your Basket')
             cy.contains('Your Basket')
-        });
+        })
 
     })
 
@@ -60,15 +57,15 @@ describe('Signup test', () => {
                 method: 'POST',
                 url: 'http://localhost:3000/rest/user/login',
                 body: userCredentials
-            }).then(response => {
-                expect(response.status).to.eq(200)
+            }).then(({response}) => {
+                expect(response.statusCode).to.eq(200)
             })
 
             //option 2:
             // cy.request("POST", "http://localhost:3000/rest/user/login", userCredentials).then(response => {
             //     expect(response.status).to.eq(200);
             // })
-        });
+        })
 
         it('Login via token', () => {
             cy.request("POST", "http://localhost:3000/rest/user/login", userCredentials).then(response => {
@@ -83,8 +80,8 @@ describe('Signup test', () => {
                 cy.get('button').contains('Dismiss').click()
                 cy.contains('Your Basket')
             })
-        });
+        })
 
     })
 
-});
+})

@@ -27,10 +27,12 @@ describe("Signup & Login", () => {
         })
     })
 
-//FIX THAT THIS SECOND IT DEPENDS ON THE FIRST IT()
+//FIX THAT THIS SECOND IT DEPENDS ON THE FIRST IT(). I should either make it in different specs maybe
     it("Test Valid Login & Mock Popular Tags", () => {
         cy.intercept("GET", "**/tags", {fixture: 'popularTags.json'}).as("getTags")
+
         cy.visit("http://localhost:4200/");
+        
         cy.get(".nav").contains("Sign in").click();
         cy.get("[placeholder='Email']").type(email);
         cy.get("[placeholder='Password']").type(password);
@@ -58,7 +60,7 @@ describe("Signup & Login", () => {
             expect(response.statusCode).to.eq(200)
             expect(response.body).to.deep.eq( this.fixtureData )
         })
-    });
+    })
     
 })
 

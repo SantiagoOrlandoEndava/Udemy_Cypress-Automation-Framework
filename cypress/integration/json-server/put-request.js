@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 
 describe("Update Request", () => {
+
+    //should make a GET after this so as to check if it is indeed modified.
     it("Update an existing post via the /posts api", () => {
         cy.request({
             method: "PUT",
@@ -12,5 +14,6 @@ describe("Update Request", () => {
         }).then((response) => {
             expect(response.status).to.eql(200);
         });
-    });
+    })
+
 });

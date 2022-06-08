@@ -17,8 +17,9 @@ describe("Post, Get, Delete Request", () => {
             }
         }).then(response => {
             expect(response.status).to.eql(201)
+            //check the response.body
         })
-    });
+    })
 
     it("Locate and assert the new comment", () => {
         cy.request({
@@ -32,11 +33,11 @@ describe("Post, Get, Delete Request", () => {
             body.forEach((item) => {
                 comments.push(item.body);
             })
-        }).then(() => {
+        }).then(() => { //probably this is not necessary. I could directly grab the last object of the body array and make the assertion
             var latestComment = comments[comments.length -1]
             expect(latestComment).to.eq(comment);
         })
-    });
+    })
 
     it("Delete the new comment", () => {
         cy.request({
@@ -45,6 +46,6 @@ describe("Post, Get, Delete Request", () => {
         }).then((response) => {
             expect(response.status).to.eql(200);
         });
-    });
+    })
 
 });
