@@ -28,11 +28,7 @@ Cypress.Commands.add("navigateTo_WebdriverUni_Checkbox_page", () => {
 })
 
 Cypress.Commands.add("selectProduct", productName => {
-    cy.get(".fixed_wrapper .prdocutname").each(($el, index, $list) => {
-        if($el.text().includes(productName)) {
-            cy.wrap($el).click()
-        }
-    });
+    cy.get(".fixed_wrapper .prdocutname").contains(productName).click()
 })
 
 Cypress.Commands.add("addProductToBasket", productName => {
